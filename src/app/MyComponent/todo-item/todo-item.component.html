@@ -1,5 +1,11 @@
+
 <div class="my-3">
-<h5>{{t.title}}</h5>
-<p>{{t.desc}}</p>
-<button class="btn btn-sm btn-danger" (click)="onClick(t)">Delete</button>
-</div>
+    <h5 [ngClass]="{'strike': !t.active}">{{t.title}}</h5>
+    <p>{{t.desc}}</p>
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1" (click)="onCheckBoxClick(t)" [checked]="!t.active">
+      <label class="form-check-label" for="exampleCheck1">Toggle Done!</label>
+    </div>
+    <button class="btn btn-sm btn-danger" (click)="onClick(t)">Delete</button>
+  </div>
+  

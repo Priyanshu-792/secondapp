@@ -7,12 +7,19 @@ import { Todo } from "../../Todo";
   styleUrls: ['./todos.component.css']
 })
 export class TodosComponent implements OnInit {
-  todos: Todo[];
+  localItem:String | null;
+  todos: Todo[]=[];
 
   constructor() {
-    localItem:String;
-    
+this.localItem = localStorage.getItem("todos");
+if(this.localItem==null)
+    {
     this.todos = [];
+  }
+  else {
+    console.log(this.todos);
+    this.todos = JSON.parse(this.localItem as string);
+  }
   }
 
   ngOnInit(): void {
@@ -30,6 +37,13 @@ localStorage.setItem("todos",JSON.stringify(this.todos));
   {
 console.log(todo);
 this.todos.push(todo);
+localStorage.setItem("todos",JSON.stringify(this.todos));
+  }
+
+  toggleTodo(todo:Todo)
+  {
+const index = this.todos.indexOf(todo);
+this.todos[index].active = !this.todos[index].active;
 localStorage.setItem("todos",JSON.stringify(this.todos));
   }
 }
